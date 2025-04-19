@@ -38,8 +38,8 @@ const EditorPage = () =>{
                 ({clients, userName, socketId})=>{
                     if(userName !== location.state?.username){
                         toast.success(`${userName} joined room`);
+                        setClients(clients);
                     }
-                setClients(clients);
                 socketRef.current.emit(ACTIONS.SYNC_CODE,{ 
                     code:codeRef.current,
                     socketId,
@@ -82,7 +82,8 @@ const EditorPage = () =>{
             <div className="logo">
                 <img className="logoImg" src="/code-snap.png" alt="logo"></img>
             </div>
-            <h3>Connected</h3>
+
+            <h3 style={{ display: 'flex', justifyContent: 'center' }}>Connected</h3>
             <div className="clientList">
             {
                 clients.map((client) => (
@@ -97,7 +98,7 @@ const EditorPage = () =>{
     <div className="editorWrap">
     <Editor socketRef={socketRef} roomId={roomId} onCodeChange={(code) =>{
         codeRef.current=code;
-    }}></Editor>
+    }} ></Editor>
     </div>
     </div>
 }
